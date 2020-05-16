@@ -48,3 +48,20 @@ for k in sorted(directory.keys()):
 # change fps as per your choice
 clip = ImageSequenceClip(new_paths, fps=10) 
 clip.write_videofile(output_video)
+
+# Adding Music 
+source_audio_path = os.path.join(SAMPLE_INPUTS, '###.mp3')  # mp3 file name
+
+final_video_path = os.path.join(SAMPLE_OUTPUTS, 'final-video.mp4')
+
+v_clip = VideoFileClip(output_video)
+duration = v_clip.duration
+
+bg_audio = AudioFileClip(source_audio_path)
+bg_music = bg_audio.subclip(0, duration)
+
+#Volume Change
+bg_music = bg_music.volumex(0.5)
+
+final_clip = v_clip.set_audio(bg_music)
+final_clip.write_videofile(final_video_path)
