@@ -1,27 +1,24 @@
-from conf import SAMPLE_INPUTS, SAMPLE_OUTPUTS
+import os
 from moviepy.editor import *
 from PIL import Image
 
-source_path = os.path.join(SAMPLE_INPUTS, "###.mp4") # change the input file name
-timeLapse_dir = os.path.join(SAMPLE_OUTPUTS, "timeLapse")
-output_video = os.path.join(SAMPLE_OUTPUTS, "timelapse.mp4")
+ABS_PATH = os.path.abspath(__file__)
+BASE_DIR = os.path.dirname(ABS_PATH)
+
+clip = VideoFileClip("Sunrise.mp4") # input video filename
+source_audio_path = os.path.join(BASE_DIR, 'timelapseMusic.mp3')  # mp3 filename
+
+timeLapse_dir = os.path.join(BASE_DIR, "timeLapse_dir")
+final_audio_video_path = os.path.join(BASE_DIR, 'final-video.mp4') # output filename
 
 os.makedirs(timeLapse_dir, exist_ok=True)
 
-clip = VideoFileClip(source_path)
-
-print(clip.reader.fps)
-print(clip.duration)
-print(nframes)
-
-# iterating through all the frames
 
 fps = clip.reader.fps
 
 for i, frame in enumerate(clip.iter_frames()):
-    
-    # change the denominator for the amount of photos you want to take
-    fphs = int(fps/0.1) 
+    # change the denominator for the frequency of photos you want to take
+    fphs = int(fps/1) 
     if i % fphs == 0 :
         current_ms = int((i / fps) * 1000)
         newimg_filepath = os.path.join(timeLapse_dir, f"{current_ms}.jpg")
@@ -44,24 +41,30 @@ new_paths = []
 for k in sorted(directory.keys()):
     filepath = directory[k]
     new_paths.append(filepath)
+    
+clip = ImageSequenceClip(new_paths, fps=30) 
 
-# change fps as per your choice
-clip = ImageSequenceClip(new_paths, fps=10) 
-clip.write_videofile(output_video)
 
-# Adding Music 
-source_audio_path = os.path.join(SAMPLE_INPUTS, '###.mp3')  # mp3 file name
+intro_duration = 4
+intro_text = TextClip(
+    "S U N R I S E", # change the opening text
+    size=clip.size,
+    fontsize=150,
+    color = "#fff",
+    bg_color= "transparent",
+    font= "Segoe-UI-Light",
+    kerning=25
+)
+intro_text = intro_text.set_duration(intro_duration)
+intro_text = intro_text.set_fps(fps)
+intro_text = intro_text.set_pos("center")
 
-final_video_path = os.path.join(SAMPLE_OUTPUTS, 'final-video.mp4')
+final_clip = concatenate_videoclips([intro_text, clip]) #final video clip
 
-v_clip = VideoFileClip(output_video)
-duration = v_clip.duration
-
+duration = final_clip.duration
 bg_audio = AudioFileClip(source_audio_path)
 bg_music = bg_audio.subclip(0, duration)
+bg_music = bg_music.volumex(1.5)
 
-#Volume Change
-bg_music = bg_music.volumex(0.5)
-
-final_clip = v_clip.set_audio(bg_music)
-final_clip.write_videofile(final_video_path)
+final_av_clip = final_clip.set_audio(bg_music)
+final_av_clip.write_videofile(final_audio_video_path) # final audio added clip
