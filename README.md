@@ -17,6 +17,6 @@ This is a bot that takes a video and an audio as inputs and gives a timelapse as
 - Pillow 7.1.2
 - Also install the latest version of [ImageMagick](https://imagemagick.org/script/download.php).
 - If you are on Windows, then to use ImageMagick you have to manually update the "default_config.py" file in moviepy.\
-Just add the following line to the file.
+Just add the following line to the file.\
 ```IMAGEMAGICK_BINARY = "<file\\path\\to\\magick.exe>"```
 
