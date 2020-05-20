@@ -4,12 +4,11 @@ This is a bot that takes a video and an audio as inputs and gives a timelapse as
 
 ## How to use
 
-1. Put the video & the audio file, you want to make a timelapse of in the same directory as timelapse.py.
-2. Input the videofile name on ```line 8```.
-3. Input the background audio file name on ```line 9```.
+1. Put the video & the audio file, you want to make a timelapse verion of in the same directory as timelapse.py.
+2. Make another directory, "timeLapse_dir" in the same directory.
+3. Input the video filename, the input audio filename and the opening_text.
 4. You can change the frequency of photos on ```line 21```.
-3. Change the video opening text on ```line 50```.
-4. Run "timelapse.py" and you'll get the final video with the name "final-video.mp4".
+5. Run "timelapse.py" and you'll get the final video with the name "final-video.mp4".
 
 ## Dependencies
 

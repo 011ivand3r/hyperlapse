@@ -7,6 +7,7 @@ BASE_DIR = os.path.dirname(ABS_PATH)
 
 clip = VideoFileClip("Sunrise.mp4") # input video filename
 source_audio_path = os.path.join(BASE_DIR, 'timelapseMusic.mp3')  # mp3 filename
+opening_text = "Treble" # opening text
 
 timeLapse_dir = os.path.join(BASE_DIR, "timeLapse_dir")
 final_audio_video_path = os.path.join(BASE_DIR, 'final-video.mp4') # output filename
@@ -47,7 +48,7 @@ clip = ImageSequenceClip(new_paths, fps=30)
 
 intro_duration = 4
 intro_text = TextClip(
-    "S U N R I S E", # change the opening text
+    opening_text,
     size=clip.size,
     fontsize=150,
     color = "#fff",
