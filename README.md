@@ -1,4 +1,4 @@
-# timelapse
+# hyperlapse
 
 This is a bot that takes a video and an audio as inputs and gives a timelapse as output.
 
