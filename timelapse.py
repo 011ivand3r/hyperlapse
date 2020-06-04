@@ -5,12 +5,12 @@ from PIL import Image
 ABS_PATH = os.path.abspath(__file__)
 BASE_DIR = os.path.dirname(ABS_PATH)
 
-clip = VideoFileClip("Sunrise.mp4") # input video filename
-source_audio_path = os.path.join(BASE_DIR, 'timelapseMusic.mp3')  # mp3 filename
+clip = VideoFileClip("input video filename .mp4") # input video filename
+source_audio_path = os.path.join(BASE_DIR, '.mp3 filename')  # mp3 filename
 opening_text = "Treble" # opening text
 
 timeLapse_dir = os.path.join(BASE_DIR, "timeLapse_dir")
-final_audio_video_path = os.path.join(BASE_DIR, 'final-video.mp4') # output filename
+final_audio_video_path = os.path.join(BASE_DIR, 'output filename .mp4') # output filename
 
 os.makedirs(timeLapse_dir, exist_ok=True)
 
@@ -18,8 +18,7 @@ os.makedirs(timeLapse_dir, exist_ok=True)
 fps = clip.reader.fps
 
 for i, frame in enumerate(clip.iter_frames()):
-    # change the denominator for the frequency of photos you want to take
-    fphs = int(fps/1) 
+    fphs = int(fps/1) # change the denominator for the frequency of photos you want to take
     if i % fphs == 0 :
         current_ms = int((i / fps) * 1000)
         newimg_filepath = os.path.join(timeLapse_dir, f"{current_ms}.jpg")
