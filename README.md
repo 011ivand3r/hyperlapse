@@ -1,6 +1,6 @@
 # hyperlapse-bot
 
-This is a bot that takes a video and an audio as inputs and gives a hyperlapse/timelapse as output.
+This is a bot that takes a normal video and an audio as inputs and gives a hyperlapse/timelapse as output.
 
 ## How to use
 
